@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import FeaturesSection from '@/components/FeaturesSection';
 
 const Home = () => {
@@ -20,9 +21,12 @@ const Home = () => {
         </header>
 
         <div className="mt-8">
-          <button className="inline-flex items-center bg-white text-black rounded-full px-6 py-3 text-sm font-medium hover:bg-zinc-200 transition-colors cursor-pointer">
+          <Link
+            href="/events"
+            className="inline-flex items-center bg-white text-black rounded-full px-6 py-3 text-sm font-medium hover:bg-zinc-200 transition-colors cursor-pointer"
+          >
             Get started
-          </button>
+          </Link>
         </div>
 
         <FeaturesSection />
