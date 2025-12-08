@@ -1,4 +1,5 @@
 import './globals.css';
+import Header from '@/components/Header';
 
 export const metadata = {
   title: 'Neighbourly',
@@ -6,10 +7,15 @@ export const metadata = {
     'A platform for neighbours to connect, organize small volunteering events, and support each other.',
 };
 
-export default function RootLayout({ children }) {
+const RootLayout = ({ children }) => {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="bg-black text-white">
+        <Header />
+        {children}
+      </body>
     </html>
   );
-}
+};
+
+export default RootLayout;
