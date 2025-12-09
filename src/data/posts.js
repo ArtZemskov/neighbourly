@@ -27,7 +27,7 @@ export const posts = [
     author: 'Julia (343)',
     createdAt: 'Today',
     joinedNeighbours: ['Mark (357)', 'Pamela (323)', 'Joris (338)'],
-    commentsCount: 3,
+    commentsCount: 2,
   },
   {
     id: '4',
@@ -38,8 +38,41 @@ export const posts = [
     author: 'Joris (338)',
     createdAt: '3 days ago',
     joinedNeighbours: ['Wilko (347)', 'Mark (357)'],
-    commentsCount: 2,
+    commentsCount: 1,
+  },
+];
+
+export const comments = [
+  {
+    id: 'c1',
+    postId: '1',
+    author: 'Anna (333)',
+    createdAt: '1 day ago',
+    text: 'I can help with feeding your cat on Friday and Saturday.',
+  },
+  {
+    id: 'c2',
+    postId: '3',
+    author: 'Mark (357)',
+    createdAt: 'Today',
+    text: 'Sounds great! I can bring some snacks.',
+  },
+  {
+    id: 'c3',
+    postId: '3',
+    author: 'Leo (301)',
+    createdAt: 'Today',
+    text: 'Does anyone have a party tent?:)',
+  },
+  {
+    id: 'c4',
+    postId: '4',
+    author: 'Sara (215)',
+    createdAt: 'Yesterday',
+    text: 'The same problem. I am in!',
   },
 ];
 
 export const getPostById = (id) => posts.find((post) => post.id === id);
+export const getCommentsForPost = (postId) =>
+  comments.filter((comment) => comment.postId === postId);

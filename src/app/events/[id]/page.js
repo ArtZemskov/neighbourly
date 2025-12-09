@@ -1,8 +1,11 @@
-import { getPostById } from '@/data/posts';
+import { getPostById, getCommentsForPost } from '@/data/posts';
+import CommentsSection from '@/components/CommentsSection';
 
 const EventDetailPage = async ({ params }) => {
   const { id } = await params;
+
   const post = getPostById(id);
+  const postComments = getCommentsForPost(id);
 
   if (!post) {
     return (
@@ -63,6 +66,7 @@ const EventDetailPage = async ({ params }) => {
                 }`}
           </p>
         </section>
+        <CommentsSection initialComments={postComments} postId={post.id} />
       </main>
     </div>
   );
