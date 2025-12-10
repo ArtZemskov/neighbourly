@@ -1,5 +1,6 @@
 import { getPostById, getCommentsForPost } from '@/data/posts';
 import CommentsSection from '@/components/CommentsSection';
+import JoinSection from '@/components/JoinSection';
 
 const EventDetailPage = async ({ params }) => {
   const { id } = await params;
@@ -49,12 +50,10 @@ const EventDetailPage = async ({ params }) => {
           </p>
 
           {post.type === 'initiative' && (
-            <p>
-              <span className="text-zinc-500">Neighbours joined:</span>{' '}
-              {joinedCount === 0
-                ? 'no one yet'
-                : post.joinedNeighbours.join(', ')}
-            </p>
+            <JoinSection
+              initialJoinedNeighbours={post.joinedNeighbours || []}
+              postId={post.id}
+            />
           )}
 
           <p>
