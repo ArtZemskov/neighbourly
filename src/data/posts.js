@@ -7,7 +7,6 @@ export const posts = [
       'I will be away for a few days and need someone in the building to feed my cat once a day and check water. I’ll leave food and instructions.',
     author: 'Pamela (323)',
     createdAt: '2 days ago',
-    commentsCount: 1,
   },
   {
     id: '2',
@@ -16,7 +15,6 @@ export const posts = [
     description: 'I need a drill this weekend. Thank you in advance!',
     author: 'Mark (357)',
     createdAt: 'Yesterday',
-    commentsCount: 0,
   },
   {
     id: '3',
@@ -27,7 +25,6 @@ export const posts = [
     author: 'Julia (343)',
     createdAt: 'Today',
     joinedNeighbours: ['Mark (357)', 'Pamela (323)', 'Joris (338)'],
-    commentsCount: 2,
   },
   {
     id: '4',
@@ -38,7 +35,6 @@ export const posts = [
     author: 'Joris (338)',
     createdAt: '3 days ago',
     joinedNeighbours: ['Wilko (347)', 'Mark (357)'],
-    commentsCount: 1,
   },
 ];
 

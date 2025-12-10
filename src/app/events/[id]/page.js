@@ -7,6 +7,7 @@ const EventDetailPage = async ({ params }) => {
 
   const post = getPostById(id);
   const postComments = getCommentsForPost(id);
+  const commentsTotal = postComments.length;
 
   if (!post) {
     return (
@@ -58,11 +59,9 @@ const EventDetailPage = async ({ params }) => {
 
           <p>
             <span className="text-zinc-500">Comments:</span>{' '}
-            {post.commentsCount === 0
+            {commentsTotal === 0
               ? 'no comments yet'
-              : `${post.commentsCount} comment${
-                  post.commentsCount > 1 ? 's' : ''
-                }`}
+              : `${commentsTotal} comment${commentsTotal > 1 ? 's' : ''}`}
           </p>
         </section>
         <CommentsSection initialComments={postComments} postId={post.id} />

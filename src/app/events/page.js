@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { posts } from '@/data/posts';
+import { posts, getCommentsForPost } from '@/data/posts';
 
 const getTypeLabel = (type) => {
   switch (type) {
@@ -22,6 +22,8 @@ const NeighbourPostCard = ({ post }) => {
     post.type === 'initiative' && Array.isArray(post.joinedNeighbours)
       ? post.joinedNeighbours.length
       : 0;
+
+  const commentsTotal = getCommentsForPost(post.id).length;
 
   return (
     <Link href={`/events/${post.id}`} className="block">
@@ -56,11 +58,9 @@ const NeighbourPostCard = ({ post }) => {
           )}
 
           <p>
-            {post.commentsCount === 0
+            {commentsTotal === 0
               ? 'No comments yet'
-              : `${post.commentsCount} comment${
-                  post.commentsCount > 1 ? 's' : ''
-                }`}
+              : `${commentsTotal} comment${commentsTotal > 1 ? 's' : ''}`}
           </p>
         </div>
       </article>
