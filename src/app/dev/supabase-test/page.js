@@ -1,5 +1,7 @@
 import { supabase } from '@/lib/supabaseClient';
 
+export const dynamic = 'force-dynamic';
+
 const SupabaseTestPage = async () => {
   const { data, error } = await supabase
     .from('buildings')
