@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HeaderAuthStatus from './HeaderAuthStatus';
 
 const Header = () => {
   return (
@@ -8,17 +9,20 @@ const Header = () => {
           Neighbourly
         </Link>
 
-        <nav className="flex gap-4 text-sm text-zinc-400">
-          <Link href="/" className="hover:text-white">
-            Home
-          </Link>
-          <Link href="/events" className="hover:text-white">
-            Events
-          </Link>
-          <Link href="/information" className="hover:text-white">
-            Information
-          </Link>
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav className="flex gap-4 text-sm text-zinc-400">
+            <Link href="/" className="hover:text-white">
+              Home
+            </Link>
+            <Link href="/events" className="hover:text-white">
+              Events
+            </Link>
+            <Link href="/information" className="hover:text-white">
+              Information
+            </Link>
+          </nav>
+          <HeaderAuthStatus />
+        </div>
       </div>
     </header>
   );
