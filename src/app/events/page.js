@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { posts, getCommentsForPost } from '@/data/posts';
 import ProtectedPage from '@/components/ProtectedPage';
+import ProfileGate from '@/components/ProfileGate';
 
 const getTypeLabel = (type) => {
   switch (type) {
@@ -72,28 +73,30 @@ const NeighbourPostCard = ({ post }) => {
 const EventsPage = () => {
   return (
     <ProtectedPage>
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <main className="w-full max-w-3xl px-6 py-16">
-          <header className="space-y-4">
-            <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
-              Neighbourly
-            </p>
-            <h1 className="text-3xl sm:text-4xl font-semibold leading-tight">
-              Events in your building
-            </h1>
-            <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl">
-              See what neighbours are organising, offering, or asking about in
-              your building.
-            </p>
-          </header>
+      <ProfileGate>
+        <div className="min-h-screen bg-black text-white flex items-center justify-center">
+          <main className="w-full max-w-3xl px-6 py-16">
+            <header className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.2em] text-zinc-400">
+                Neighbourly
+              </p>
+              <h1 className="text-3xl sm:text-4xl font-semibold leading-tight">
+                Events in your building
+              </h1>
+              <p className="text-zinc-400 text-base sm:text-lg leading-relaxed max-w-xl">
+                See what neighbours are organising, offering, or asking about in
+                your building.
+              </p>
+            </header>
 
-          <div className="mt-10 space-y-4">
-            {posts.map((post) => (
-              <NeighbourPostCard key={post.id} post={post} />
-            ))}
-          </div>
-        </main>
-      </div>
+            <div className="mt-10 space-y-4">
+              {posts.map((post) => (
+                <NeighbourPostCard key={post.id} post={post} />
+              ))}
+            </div>
+          </main>
+        </div>
+      </ProfileGate>
     </ProtectedPage>
   );
 };
