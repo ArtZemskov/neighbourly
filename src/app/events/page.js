@@ -1,74 +1,6 @@
-import Link from 'next/link';
-import { posts, getCommentsForPost } from '@/data/posts';
 import ProtectedPage from '@/components/ProtectedPage';
 import ProfileGate from '@/components/ProfileGate';
-
-const getTypeLabel = (type) => {
-  switch (type) {
-    case 'help':
-      return 'Help';
-    case 'sharing':
-      return 'Sharing';
-    case 'initiative':
-      return 'Initiative';
-    case 'question':
-      return 'Question';
-    default:
-      return 'Post';
-  }
-};
-
-const NeighbourPostCard = ({ post }) => {
-  const typeLabel = getTypeLabel(post.type);
-  const joinedCount =
-    post.type === 'initiative' && Array.isArray(post.joinedNeighbours)
-      ? post.joinedNeighbours.length
-      : 0;
-
-  const commentsTotal = getCommentsForPost(post.id).length;
-
-  return (
-    <Link href={`/events/${post.id}`} className="block">
-      <article className="rounded-xl border border-zinc-800 bg-zinc-950/40 p-4 sm:p-5 hover:border-zinc-600 transition-colors">
-        <div className="flex items-start justify-between gap-3">
-          <span className="inline-flex items-center rounded-full border border-zinc-700 px-2 py-1 text-xs font-medium uppercase tracking-wide text-zinc-300">
-            {typeLabel}
-          </span>
-        </div>
-
-        <h2 className="mt-3 text-base sm:text-lg font-semibold">
-          {post.title}
-        </h2>
-
-        <p className="mt-2 text-sm text-zinc-400 leading-relaxed">
-          {post.description}
-        </p>
-
-        <div className="mt-4 flex flex-col gap-1 text-xs text-zinc-500">
-          <p>
-            Posted {post.createdAt} · {post.author}
-          </p>
-
-          {post.type === 'initiative' && (
-            <p>
-              {joinedCount === 0
-                ? 'No neighbours joined yet'
-                : `${joinedCount} neighbour${
-                    joinedCount > 1 ? 's' : ''
-                  } joined`}
-            </p>
-          )}
-
-          <p>
-            {commentsTotal === 0
-              ? 'No comments yet'
-              : `${commentsTotal} comment${commentsTotal > 1 ? 's' : ''}`}
-          </p>
-        </div>
-      </article>
-    </Link>
-  );
-};
+import EventsFeed from '@/components/EventsFeed';
 
 const EventsPage = () => {
   return (
@@ -89,11 +21,7 @@ const EventsPage = () => {
               </p>
             </header>
 
-            <div className="mt-10 space-y-4">
-              {posts.map((post) => (
-                <NeighbourPostCard key={post.id} post={post} />
-              ))}
-            </div>
+            <EventsFeed />
           </main>
         </div>
       </ProfileGate>
