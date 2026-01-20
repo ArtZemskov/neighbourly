@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabaseClient';
+import Link from 'next/link';
 
 const categoryLabels = {
   help: 'Help',
@@ -157,29 +158,26 @@ const EventsFeed = () => {
             categoryLabels[post.category] || post.category || 'Other';
 
           return (
-            <article
-              key={post.id}
-              className="rounded-3xl border border-zinc-800 bg-zinc-950/60 px-6 py-5 shadow-lg"
-            >
-              <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
-                <span className="inline-flex items-center rounded-full border border-zinc-700 px-3 py-1 uppercase tracking-[0.16em]">
-                  {categoryLabel}
-                </span>
-                <span className="text-zinc-500">
-                  Posted on {formatDate(post.created_at)}
-                </span>
-              </div>
+            <Link key={post.id} href={`/events/${post.id}`} className="block">
+              <article className="rounded-3xl border border-zinc-800 bg-zinc-950/60 px-6 py-5 shadow-lg hover:border-zinc-500 transition-colors">
+                <div className="flex flex-wrap items-center gap-3 text-xs text-zinc-400">
+                  <span className="inline-flex items-center rounded-full border border-zinc-700 px-3 py-1 uppercase tracking-[0.16em]">
+                    {categoryLabel}
+                  </span>
+                  <span className="text-zinc-500">
+                    Posted on {formatDate(post.created_at)}
+                  </span>
+                </div>
 
-              <h2 className="mt-4 text-lg font-semibold text-zinc-100">
-                {post.title}
-              </h2>
+                <h2 className="mt-4 text-lg font-semibold text-zinc-100">
+                  {post.title}
+                </h2>
 
-              <p className="mt-2 text-sm text-zinc-300 leading-relaxed">
-                {post.body}
-              </p>
-
-              {/* join / comments */}
-            </article>
+                <p className="mt-2 text-sm text-zinc-300 leading-relaxed line-clamp-3">
+                  {post.body}
+                </p>
+              </article>
+            </Link>
           );
         })
       )}
