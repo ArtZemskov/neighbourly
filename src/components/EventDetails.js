@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
+import CommentsSection from './CommentsSection';
 
 const categoryLabels = {
   help: 'Help',
@@ -134,6 +135,7 @@ const EventDetails = ({ postId }) => {
           {post.body}
         </p>
       </article>
+      <CommentsSection postId={post.id} />
     </div>
   );
 };
