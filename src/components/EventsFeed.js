@@ -60,7 +60,7 @@ const EventsFeed = () => {
 
         const { data: postsData, error: postsError } = await supabase
           .from('posts')
-          .select('id, category, title, body, created_at')
+          .select('id, category, title, body, created_at, post_joins(count)')
           .eq('building_id', buildingId)
           .order('created_at', { ascending: false });
 
@@ -157,6 +157,13 @@ const EventsFeed = () => {
           const categoryLabel =
             categoryLabels[post.category] || post.category || 'Other';
 
+          const joinCount =
+            post.post_joins && post.post_joins.length > 0
+              ? post.post_joins[0].count || 0
+              : 0;
+
+          const isInitiative = post.category === 'initiative';
+
           return (
             <Link key={post.id} href={`/events/${post.id}`} className="block">
               <article className="rounded-3xl border border-zinc-800 bg-zinc-950/60 px-6 py-5 shadow-lg hover:border-zinc-500 transition-colors">
@@ -176,6 +183,16 @@ const EventsFeed = () => {
                 <p className="mt-2 text-sm text-zinc-300 leading-relaxed line-clamp-3">
                   {post.body}
                 </p>
+
+                {isInitiative && (
+                  <p className="mt-3 text-xs text-zinc-400">
+                    {joinCount === 0
+                      ? 'No neighbours joined yet'
+                      : `${joinCount} neighbour${
+                          joinCount > 1 ? 's' : ''
+                        } joined`}
+                  </p>
+                )}
               </article>
             </Link>
           );
