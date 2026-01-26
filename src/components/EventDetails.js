@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import CommentsSection from './CommentsSection';
+import JoinSection from './JoinSection';
 
 const categoryLabels = {
   help: 'Help',
@@ -40,9 +41,8 @@ const EventDetails = ({ postId }) => {
         }
 
         if (!data) {
-          // либо пост не существует, либо RLS не даёт его увидеть
           throw new Error(
-            'This event could not be found or you don’t have access.'
+            'This event could not be found or you don’t have access.',
           );
         }
 
@@ -50,7 +50,7 @@ const EventDetails = ({ postId }) => {
       } catch (error) {
         console.error('EventDetails error:', error);
         setErrorMessage(
-          error?.message || 'Something went wrong while loading this event.'
+          error?.message || 'Something went wrong while loading this event.',
         );
       } finally {
         setIsLoading(false);
@@ -135,6 +135,9 @@ const EventDetails = ({ postId }) => {
           {post.body}
         </p>
       </article>
+
+      {post.category === 'initiative' && <JoinSection postId={post.id} />}
+
       <CommentsSection postId={post.id} />
     </div>
   );
